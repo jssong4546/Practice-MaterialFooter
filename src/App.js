@@ -15,6 +15,8 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 
 import { mainListItems, secondaryListItems } from './listItems';
 import First from './First';
@@ -50,6 +52,7 @@ function Copyright() {
 const drawerWidth = 150;
 
 const useStyles = makeStyles((theme) => ({
+
   root: {
     display: 'flex',
   },
@@ -109,9 +112,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
-    flexGrow: 1,
-    height: '100vh',
-    overflow: 'auto',
+
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -131,6 +132,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const matches600 = useMediaQuery('(min-width:600px)');
+  const matchesBelow600 = useMediaQuery('(max-width:600px)');
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -144,13 +147,19 @@ export default function Dashboard() {
 
       <CssBaseline />
     
-
+      {
+        matches600 ? <div>matches600</div> : null
+      }
+      {
+        matchesBelow600 ? <div>matchesBelow600</div> : null
+      }
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={1} >
-          <Grid container lg={6}>
-          <Grid item xs={12} md={12} lg={12} className={fixedHeightPaper} style={{backgroundColor: 'hotpink'}}>
+            
+            <Grid container lg={6}>
+              <Grid item xs={12} md={12} lg={12} className={fixedHeightPaper} style={{backgroundColor: 'hotpink'}}>
 
               <Third />
 
