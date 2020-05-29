@@ -16,13 +16,15 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 
-import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems, secondaryListItems } from './Fourth';
 import First from './First';
 import Second from './Second';
 import Orders from './Orders';
 import Third from './Third';
+import Fourth from './Fourth';
 
 function Copyright() {
   return (
@@ -129,6 +131,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+const theme = createMuiTheme({
+  breakpoints: {
+    // Define custom breakpoint values.
+    // These will apply to Material-UI components that use responsive
+    // breakpoints, such as `Grid` and `Hidden`. You can also use the
+    // theme breakpoint functions `up`, `down`, and `between` to create
+    // media queries for these breakpoints
+    values: {
+      xs: 0,
+      sm: 450,
+      md: 600,
+      lg: 800,
+      xl: 1200
+    }
+  }
+});
+
+
+
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -143,6 +165,23 @@ export default function Dashboard() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
+    <MuiThemeProvider theme={theme}>
+    <Container maxWidth="lg" className={classes.container}>
+    <Grid container xs={12} >
+
+    <Fourth />
+    </Grid>
+    
+
+
+    <Box pt={4}>
+      <Copyright />
+    </Box>
+  </Container>
+  </MuiThemeProvider>
+  )
+
+  return (
     <div className={classes.root}>
 
       <CssBaseline />
@@ -155,39 +194,37 @@ export default function Dashboard() {
       }
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={1} >
-            
-            <Grid container lg={6}>
-              <Grid item xs={12} md={12} lg={12} className={fixedHeightPaper} style={{backgroundColor: 'hotpink'}}>
+        
 
-              <Third />
-
-          </Grid>
-          </Grid>
-          <Grid container lg={6} md={12} spacing={0}>
-            {/* Chart */}
-            <Grid item xs={12} md={7} lg={7} className={fixedHeightPaper} style={{backgroundColor: 'tan'}}>
-              
-              <First />
-
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={5} lg={5} className={fixedHeightPaper} style={{backgroundColor: 'powderblue'}}>
-
-              <Second />
-
-            </Grid>
-            {/* Recent Orders */}
-            
-          </Grid>
-          
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
       </main>
     </div>
   );
 }
+
+// <Grid container spacing={1} >
+            
+// <Grid container lg={6}>
+//   <Grid item xs={12} md={12} lg={12} className={fixedHeightPaper} style={{backgroundColor: 'hotpink'}}>
+
+//   <First />
+
+// </Grid>
+// </Grid>
+// <Grid container lg={6} md={12} spacing={0}>
+// {/* Chart */}
+// <Grid item xs={12} md={7} lg={7} className={fixedHeightPaper} style={{backgroundColor: 'tan'}}>
+  
+//   <First />
+
+// </Grid>
+// {/* Recent Deposits */}
+// <Grid item xs={12} md={5} lg={5} className={fixedHeightPaper} style={{backgroundColor: 'powderblue'}}>
+
+//   <Second />
+
+// </Grid>
+// {/* Recent Orders */}
+
+// </Grid>
+
+// </Grid>
